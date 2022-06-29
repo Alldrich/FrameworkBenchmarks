@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -23,8 +23,7 @@ namespace PlatformBenchmarks
 
         private byte _n = 10;
 
-        private byte[] GMT = new byte[3]
-        {
+        private byte[] GMT = new[]        {
         71,
         77,
         84

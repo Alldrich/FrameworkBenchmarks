@@ -39,7 +39,7 @@ namespace PlatformBenchmarks
 
         private static readonly AsciiString _result_plaintext = "Hello, World!";
 
-        private static readonly byte[] LenData = new byte[10] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
+        private static readonly byte[] LenData = new[]{ 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
 
         private static byte _Space = 32;
 
