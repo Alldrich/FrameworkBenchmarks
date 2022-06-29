@@ -39,7 +39,7 @@ namespace PlatformBenchmarks
 
         private static readonly AsciiString _result_plaintext = "Hello, World!";
 
-        private static readonly byte[] LenData = new[]{ 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
+        private static readonly byte[] LenData = new[] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
 
         private static byte _Space = 32;
 
@@ -51,9 +51,9 @@ namespace PlatformBenchmarks
 
         }
 
-        public void Default(IFiberRw<HttpToken> fiberRw,ref WriteBytes write)
+        public void Default(IFiberRw<HttpToken> fiberRw, ref WriteBytes write)
         {
-            write.Write("<b> zysocket server</b><hr/>");         
+            write.Write("<b> zysocket server</b><hr/>");
             write.Write("error not found!");
 
             var length = write.Stream.Length - fiberRw.UserToken.HttpHandlerPostion;
@@ -91,14 +91,14 @@ namespace PlatformBenchmarks
         public async Task Receive(IFiberRw<HttpToken> fiberRw, Memory<byte> memory_r, WriteBytes write)
         {
             var data = (await fiberRw.ReadLine(memory_r));
-            ReadHander(fiberRw,ref data,ref write);
+            ReadHander(fiberRw, ref data, ref write);
             fiberRw.StreamReadFormat.Position = fiberRw.StreamReadFormat.Length;
         }
 
 
-        private void ReadHander(IFiberRw<HttpToken> fiberRw,ref Memory<byte> linedata,ref WriteBytes write)
+        private void ReadHander(IFiberRw<HttpToken> fiberRw, ref Memory<byte> linedata, ref WriteBytes write)
         {
-            
+
             var token = fiberRw.UserToken;
             ReadOnlySpan<byte> line = linedata.Span;
             ReadOnlySpan<byte> url = line;
@@ -111,15 +111,15 @@ namespace PlatformBenchmarks
                 {
                     if (count != 0)
                     {
-                        url = line.Slice(offset2, i - offset2);                                      
+                        url = line.Slice(offset2, i - offset2);
                         break;
-                    }                  
+                    }
                     offset2 = i + 1;
                     count++;
                 }
             }
 
-          
+
             int queryIndex = AnalysisUrl(url);
             ReadOnlySpan<byte> queryString = default;
             ReadOnlySpan<byte> baseUrl;
@@ -156,7 +156,7 @@ namespace PlatformBenchmarks
             {
                 write.Write(_headerContentTypeJson.Data, 0, _headerContentTypeJson.Length);
                 OnWriteContentLength(write, token);
-                queries(Encoding.ASCII.GetString(queryString),fiberRw, write);
+                queries(Encoding.ASCII.GetString(queryString), fiberRw, write);
             }
             else if (baseUrl.Length == _path_Fortunes.Length && baseUrl.StartsWith(_path_Fortunes))
             {
@@ -168,7 +168,7 @@ namespace PlatformBenchmarks
             {
                 write.Write(_headerContentTypeHtml.Data, 0, _headerContentTypeHtml.Length);
                 OnWriteContentLength(write, token);
-                Default( fiberRw, ref write);
+                Default(fiberRw, ref write);
             }
 
         }
@@ -192,7 +192,7 @@ namespace PlatformBenchmarks
             token.HttpHandlerPostion = (int)write.Stream.Position;
         }
 
-       
+
 
 
 
