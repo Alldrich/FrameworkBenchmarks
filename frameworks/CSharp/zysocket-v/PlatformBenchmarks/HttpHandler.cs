@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +54,7 @@ namespace PlatformBenchmarks
         public void Default(IFiberRw<HttpToken> fiberRw,ref WriteBytes write)
         {
             write.Write("<b> zysocket server</b><hr/>");         
-            write.Write($"error not found!");
+            write.Write("error not found!");
 
             var length = write.Stream.Length - fiberRw.UserToken.HttpHandlerPostion;
             write.Stream.Position = fiberRw.UserToken.ContentPostion.postion;
