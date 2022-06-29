@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Data;
@@ -342,7 +342,7 @@ namespace PlatformBenchmarks
                     }
                 }
                 mInited = true;
-                HttpServer.ApiServer.Log(LogType.Info, null, $"Init update commands cached");
+                HttpServer.ApiServer.Log(LogType.Info, null, "Init update commands cached");
                 return;
             }
         }
