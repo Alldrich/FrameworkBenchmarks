@@ -106,8 +106,7 @@ public class Scenarios
 
     public bool Any(string partialName) =>
         typeof(Scenarios).GetTypeInfo().DeclaredProperties
-            .Where(p => p.Name.IndexOf(partialName, StringComparison.Ordinal) >= 0 && (bool)p.GetValue(this))
-            .Any();
+.Any(p => p.Name.IndexOf(partialName, StringComparison.Ordinal) >= 0 && (bool)p.GetValue(this));
 
     public IEnumerable<EnabledScenario> GetEnabled() =>
         typeof(Scenarios).GetTypeInfo().DeclaredProperties
