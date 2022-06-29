@@ -55,22 +55,19 @@ fn main() {
                     headers.insert(CONTENT_TYPE, html_ct.clone());
                     headers.insert(SERVER, server_header.clone());
 
-                    match req.uri.path() {
-                        "/fortunes" => {
-                            future::Either::A(db_conn.tell_fortune().map(move |fortunes| {
-                                let mut buf = String::with_capacity(2048);
-                                let _ = write!(&mut buf, "{}", FortunesTemplate { fortunes });
-                                let mut res = Response::new(Body::from(buf));
-                                *res.headers_mut() = headers;
-                                res
-                            }))
-                        }
-                        _ => {
-                            let mut res = Response::new(Body::empty());
-                            *res.status_mut() = hyper::StatusCode::NOT_FOUND;
+                    if let "/fortunes" = req.uri.path() {
+                        future::Either::A(db_conn.tell_fortune().map(move |fortunes| {
+                            let mut buf = String::with_capacity(2048);
+                            let _ = write!(&mut buf, "{}", FortunesTemplate { fortunes });
+                            let mut res = Response::new(Body::from(buf));
                             *res.headers_mut() = headers;
-                            future::Either::B(future::ok(res))
-                        }
+                            res
+                        }))
+                    } else {
+                        let mut res = Response::new(Body::empty());
+                        *res.status_mut() = hyper::StatusCode::NOT_FOUND;
+                        *res.headers_mut() = headers;
+                        future::Either::B(future::ok(res))
                     }
                 });
 
