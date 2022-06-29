@@ -24,7 +24,7 @@ namespace PlatformBenchmarks
 
         private byte _n = 10;
 
-        private byte[] GMT = new[]        {
+        private byte[] GMT = {
         71,
         77,
         84
