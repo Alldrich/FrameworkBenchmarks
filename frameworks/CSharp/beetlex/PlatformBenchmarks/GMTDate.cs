@@ -1,4 +1,4 @@
-﻿using BeetleX.Buffers;
+using BeetleX.Buffers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,8 +24,7 @@ namespace PlatformBenchmarks
 
         private byte _n = 10;
 
-        private byte[] GMT = new byte[3]
-        {
+        private byte[] GMT = new[]        {
         71,
         77,
         84
