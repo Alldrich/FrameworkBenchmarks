@@ -1,4 +1,4 @@
-﻿using BeetleX;
+using BeetleX;
 using BeetleX.Buffers;
 using BeetleX.EventArgs;
 using SpanJson;
@@ -140,7 +140,7 @@ namespace PlatformBenchmarks
                     if (token.CurrentRequest == null)
                     {
                         var request = new RequestData();
-                        byte[] buffer = null;
+                        byte[]? buffer = null;
                         buffer = new byte[result.Length];
                         pipeStream.Read(buffer, 0, result.Length);
                         request.Data = new ArraySegment<byte>(buffer, 0, result.Length);
